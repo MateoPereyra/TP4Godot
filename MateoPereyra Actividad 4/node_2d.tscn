@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://cmwdw8kgbef6b"]
+
+[ext_resource type="Shader" uid="uid://d31rollx24a6c" path="res://node_2d.tres" id="1_0e48y"]
+[ext_resource type="Texture2D" uid="uid://dhdhcylp0e1le" path="res://8bitmegaman.png" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://bu3nh16kq7e80" path="res://ColorShader.gd" id="3_epypp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_epypp"]
+shader = ExtResource("1_0e48y")
+shader_parameter/NewBlue = Color(0.878431, 0.152941, 0.101961, 1)
+shader_parameter/NewLBlue = Color(1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0e48y"]
+atlas = ExtResource("1_wtcfe")
+region = Rect2(98, 0, 29, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epypp"]
+atlas = ExtResource("1_wtcfe")
+region = Rect2(127, 0, 29, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hol4"]
+atlas = ExtResource("1_wtcfe")
+region = Rect2(156, 0, 29, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtcfe"]
+atlas = ExtResource("1_wtcfe")
+region = Rect2(127, 0, 29, 38)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y32ns"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_0e48y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epypp")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_0hol4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtcfe")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}]
+
+[node name="main" type="Node2D" unique_id=640643818]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1251454555]
+texture_filter = 1
+material = SubResource("ShaderMaterial_epypp")
+position = Vector2(534, 288)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_y32ns")
+animation = &"idle"
+frame_progress = 0.78862244
+script = ExtResource("3_epypp")
+firstColor = Array[Color]([Color(0, 0.4509804, 0.96862745, 1), Color(0.41568628, 0.4117647, 0.4117647, 1), Color(0.80784315, 0.14117648, 0.003921569, 1), Color(0.4627451, 0.42352942, 0.003921569, 1), Color(0.28235295, 0.23921569, 0.92941177, 1), Color(0.98039216, 0.3529412, 0.6666667, 1)])
+secondColor = Array[Color]([Color(0, 1, 1, 1), Color(0.9764706, 0.9764706, 0.9764706, 1), Color(0.99215686, 0.99215686, 0.99215686, 1), Color(0.95686275, 0.84705883, 0.6039216, 1), Color(0.9607843, 0.9607843, 0.9607843, 1), Color(0.99215686, 0.6862745, 0.9843137, 1)])
+
+[node name="Camera2D" type="Camera2D" parent="AnimatedSprite2D" unique_id=1220785357]
+
+[node name="Control" type="Control" parent="." unique_id=431052423]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -44.0
+offset_top = -38.0
+offset_right = 1112.0
+offset_bottom = 613.0
+
+[node name="ButtonLeft" type="Button" parent="Control" unique_id=1082233418]
+texture_filter = 1
+layout_mode = 0
+offset_left = 348.0
+offset_top = 422.0
+offset_right = 421.0
+offset_bottom = 453.0
+scale = Vector2(2, 2)
+text = "Anterior"
+
+[node name="ButtonRight" type="Button" parent="Control" unique_id=779574159]
+texture_filter = 1
+layout_mode = 0
+offset_left = 684.0
+offset_top = 422.0
+offset_right = 764.0
+offset_bottom = 453.0
+scale = Vector2(2, 2)
+text = "Siguiente"
+
+[connection signal="pressed" from="Control/ButtonLeft" to="AnimatedSprite2D" method="_on_button_left_pressed"]
+[connection signal="pressed" from="Control/ButtonRight" to="AnimatedSprite2D" method="_on_button_right_pressed"]
